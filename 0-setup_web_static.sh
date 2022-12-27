@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # bash sscript that sets up the server for deplyment
 # -----update the rest-----
+# shellcheck disable=SC2016
 
 # install Nginx
 sudo apt update
@@ -19,7 +20,7 @@ content="<html>
 </html>"
 
 sudo mkdir -p /data/web_static/shared/
-sudo echo "$content" > /data/web_static/releases/test/index.html
+echo "$content" > /data/web_static/releases/test/index.html
 
 #creatnig a symbolic link that links /data/web_static/current
 # -to /data/web_static/releases/test/
@@ -62,5 +63,5 @@ then
     sudo unlink $FILE
 fi
 
-sudo echo "$conf" > /etc/nginx/sites-enabled/reinhard
+echo "$conf" > /etc/nginx/sites-enabled/reinhard
 sudo nginx -s reload

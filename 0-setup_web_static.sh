@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # bash sscript that sets up the server for deplyment
 # -----update the rest-----
-# shellcheck disable=SC2016
 
 # install Nginx
 sudo apt update
@@ -33,7 +32,7 @@ sudo chown -R ubuntu:ubuntu /data/
 # to hbnb_static  ex (https://mydomainname.tech/hbnb_static)
 # create a new conf file for teh server that will get included in the
 # nginx.conf
-conf='
+conf="
 server {
         listen 80 default_server;
         listen [::]:80 default_server;
@@ -44,7 +43,7 @@ server {
         location / {
                 # First attempt to serve request as file, then
                 # as directory, then fall back to displaying a 404.
-                try_files $uri $uri/ =404;
+                try_files \$uri \$uri/ =404;
         }
 
         location /redirect_me {
@@ -55,7 +54,7 @@ server {
                 alias /data/web_static/current/;
         }
 
-}'
+}"
 
 FILE=/etc/nginx/sites-enabled/default
 if test -f "$FILE";

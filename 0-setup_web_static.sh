@@ -26,7 +26,7 @@ sudo echo "$content" > /data/web_static/releases/test/index.html
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 #give ownership of the data folder to the ubuntu user <rescursive>
-sudo chown -R "$USER":"$USER" /data/
+sudo chown -R ubuntu:ubuntu /data/
 
 #update the nginx config file to serve content of /data/web_static/current/
 # to hbnb_static  ex (https://mydomainname.tech/hbnb_static)

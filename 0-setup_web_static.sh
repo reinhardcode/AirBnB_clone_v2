@@ -55,6 +55,8 @@ server {
         }
 
 }"
+#this part removes the default linked config file in sites-enabled
+#and creates a new config reinhard.
 
 FILE=/etc/nginx/sites-enabled/default
 if test -f "$FILE";

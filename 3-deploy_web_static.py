@@ -1,12 +1,40 @@
-#!/usr/bin/python3
-"""fabric script based on `1-pack_web_static.py` that distributes an archive
-to your web servers using the function `do_deploy`
+#!/user/bin/python3
 """
+fabric script based on `2-do_deploy_web_Static.py` that creates an
+achive to your web servesrs using the function `deploy`
+"""
+
 from fabric.api import *
 from os import path
+from datetime import datetime
 
 env.hosts = ['54.236.25.236', '54.173.164.226']
 env.user = "ubuntu"
+
+
+def deploy():
+    """deploy static files in web_static dir to webservers"""
+    archive_path = do_pack()
+    if archive_path is not None:
+        return_val = do_deploy(archive_path)
+        return return_val
+    else:
+        return False
+
+
+def do_pack():
+    """
+    generates achive from the web_static folder/dir
+    """
+    try:
+        if not path.exists("versions"):
+            local('mkdir versions')
+        time_s = datetime.now().strftime("%Y%m%d%H%M%S")
+        full_path = "versions/web_static_{}.tgz".format(time_s)
+        local('tar -cvzf {} web_static'.format(full_path))
+        return full_path
+    except Exception:
+        return None
 
 
 def do_deploy(archive_path):

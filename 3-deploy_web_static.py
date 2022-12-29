@@ -1,4 +1,4 @@
-#!/user/bin/python3
+#!/usr/bin/python3
 """
 fabric script based on `2-do_deploy_web_Static.py` that creates an
 achive to your web servesrs using the function `deploy`

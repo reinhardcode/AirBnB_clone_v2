@@ -8,22 +8,25 @@ from os import path, environ
 env.hosts = ['54.236.25.236', '54.173.164.226']
 env.user = "ubuntu"
 
+
 def do_deploy(archive_path):
     """deploy achive files to web servers"""
 
     file_name = archive_path.split("/")[1]
+    f_path = "/data/web_static/releases/"
     new_name = archive_path.split(".")[0].split("/")[1]
+    new_name = "/data/web_static/releases/{}".format(new_name)
 
     if not path.exists(archive_path):
         return False
 
     try:
         put(archive_path, "/tmp/")
-        run("tar -xzvf /tmp/{} -C /data/web_static/releases/".format(file_name))
-        run("mv /data/web_static/releases/{} /data/web_static/releases/{}".format("web_static", new_name))
+        run("tar -xzvf /tmp/{} -C {}".format(file_name, f_path))
+        run("mv {}{} {}".format(f_path, "web_static", new_name))
         run("rm -rf /tmp/{}".format(file_name))
         run("rm -f /data/web_static/current")
-        run("ln -s /data/web_static/releases/{} /data/web_static/current".format(new_name))
+        run("ln -s {} /data/web_static/current".format(new_name))
         print("New version deployed")
         return True
     except Exception:

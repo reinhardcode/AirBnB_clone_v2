@@ -9,9 +9,9 @@ from os import listdir
 env.hosts = ['54.236.25.236', '54.173.164.226']
 env.user = "ubuntu"
 
+
 def do_clean(number=0):
     """delete out of date achive"""
-
 
     versions = listdir("versions")
     ver = []
@@ -20,7 +20,7 @@ def do_clean(number=0):
     ver.sort(reverse=True)
 
     print(ver)
-    
+
     if number == 0 or number == 1:
         del ver[0]
     else:
@@ -31,4 +31,3 @@ def do_clean(number=0):
         file_rem = "/data/web_static/releases/web_satic_{}".format(i)
         local("rm -f {}".format(file_loc))
         run("rm -f {}".format(file_rem))
-

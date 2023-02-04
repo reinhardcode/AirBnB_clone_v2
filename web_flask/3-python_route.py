@@ -26,6 +26,7 @@ def text_func(text):
     return "C {}".format(text)
 
 
+@app.route("/python", strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def text1_func(text="cool"):
     """hello python"""

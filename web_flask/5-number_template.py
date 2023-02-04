@@ -39,6 +39,7 @@ def text2_func(n):
     """numberz"""
     return '{} is a number'.format(n)
 
+
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def text3_func(n):
     """numbers for page"""

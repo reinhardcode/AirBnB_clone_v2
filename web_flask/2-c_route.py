@@ -9,16 +9,19 @@ app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
 def hello_world():
+    """hello world"""
     return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
+    """hello world"""
     return 'HBNB'
 
 
 @app.route('/c/<text>', strict_slashes=False)
 def text_func(text):
+    """hello world"""
     return f'C {text}'
 
 

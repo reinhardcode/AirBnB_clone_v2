@@ -22,6 +22,7 @@ def hbnb():
 @app.route('/c/<text>', strict_slashes=False)
 def text_func(text):
     """hello world"""
+    text = text.replace("_", " ")
     return f'C {text}'
 
 

@@ -29,8 +29,7 @@ def text_func(text):
 @app.route('/python/<text>', strict_slashes=False)
 def text1_func(text="cool"):
     """hello python"""
-    if text is str:
-        text = text.replace("_", " ")
+    text = text.replace("_", " ")
     return "Python {}".format(text)
 
 

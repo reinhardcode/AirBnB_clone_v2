@@ -23,7 +23,7 @@ def hbnb():
 def text_func(text):
     """hello world"""
     text = text.replace("_", " ")
-    return f'C {text}'
+    return "C {}".format(text)
 
 
 if __name__ == "__main__":

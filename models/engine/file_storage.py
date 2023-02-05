@@ -13,8 +13,8 @@ class FileStorage:
         if cls:
             dicts = {}
             for key in self.__objects:
-               if cls.__name__ in key:
-                   dicts[key] = self.__objects[key]
+                if cls.__name__ in key:
+                    dicts[key] = self.__objects[key]
             return dicts
         return FileStorage.__objects
 
@@ -64,7 +64,6 @@ class FileStorage:
         if obj:
             del self.__objects[obj.to_dict()['__class__'] + '.' + obj.id]
 
-
     def close(self):
         """calls relaod methpod for deserialising the json file to obj"""
-        FileStorage.reload()   
+        FileStorage.reload()

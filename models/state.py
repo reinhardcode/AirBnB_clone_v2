@@ -17,7 +17,10 @@ if st == "db":
 
         name = Column(String(128), nullable=False)
 
-        cities = relationship("City", cascade="all,delete, delete-orphan, merge, save-update", back_populates="state")
+        cities = relationship("City",
+                              cascade="all, delete, delete-orphan,\
+                                      merge, save-update",
+                              back_populates="state")
 else:
     class State(BaseModel):
         name = ""
@@ -27,7 +30,7 @@ else:
 
             from models import storage
             all_cities = storage.all(City)
-            cities =[]
+            cities = []
 
             for city in all_cities.values():
                 if city.state_id == self.id:

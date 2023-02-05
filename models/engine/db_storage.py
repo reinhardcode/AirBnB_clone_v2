@@ -90,3 +90,8 @@ class DBStorage:
 
         Session = scoped_session(session_fctry)
         self.__session = Session()
+
+    def close(self):
+        """call remove method on private method attr self.__session"""
+        self.Session.remove()
+        self.__session = self.Session()

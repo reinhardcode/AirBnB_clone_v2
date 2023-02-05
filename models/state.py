@@ -9,26 +9,27 @@ from os import getenv
 
 st = getenv("HBNB_TYPE_STORAGE")
 
-class State(BaseModel, Base):
-    """ State class """
+if st == "db":
+    class State(BaseModel, Base):
+        """ State class """
 
-    __tablename__ = "states"
+        __tablename__ = "states"
 
-    if st == "db":
         name = Column(String(128), nullable=False)
 
         cities = relationship("City", cascade="all,delete, delete-orphan, merge, save-update", back_populates="state")
-    else:
+else:
+    class State(BaseModel):
         name = ""
         @property
         def cities(self):
             """getter method for the filestorage"""
 
             from models import storage
-            obj = storage.all()
-            lst = list(obj)
-            new =[]
+            all_cities = storage.all(City)
+            cities =[]
 
-            for i in lst:
-                if "City" in i:
-                    new.append(City(obj[i]))
+            for city in all_cities.values():
+                if city.state_id == self.id:
+                    cities.append(city)
+            return cities

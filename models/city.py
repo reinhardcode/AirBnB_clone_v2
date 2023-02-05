@@ -9,12 +9,12 @@ from os import getenv
 st = getenv("HBNB_TYPE_STORAGE")
 
 
-class City(BaseModel, Base):
-    """ The city class, contains state ID and name """
+if st == "db":
+    class City(BaseModel, Base):
+        """ The city class, contains state ID and name """
 
-    __tablename__ = "cities"
+        __tablename__ = "cities"
     
-    if st == "db":
         name = Column(String(128), nullable=False)
         state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
 
@@ -24,6 +24,8 @@ class City(BaseModel, Base):
 
         places = relationship("Place", cascade="all,delete, delete-orphan, merge, save-update", back_populates="cities")
 
-    else:
+else:
+    class City(BaseModel):
+        """this is a class for the fs"""
         name = ""
         state_id = ""

@@ -63,3 +63,8 @@ class FileStorage:
         """
         if obj:
             del self.__objects[obj.to_dict()['__class__'] + '.' + obj.id]
+
+
+    def close(self):
+        """calls relaod methpod for deserialising the json file to obj"""
+        FileStorage.reload()   

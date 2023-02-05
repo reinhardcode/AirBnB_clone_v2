@@ -23,6 +23,7 @@ if st == "db":
                               back_populates="state")
 else:
     class State(BaseModel):
+        """class for fs"""
         name = ""
         @property
         def cities(self):

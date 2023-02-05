@@ -22,13 +22,12 @@ place_amenity = Table("place_amenity",Base.metadata,
                     nullable=False
                     )
                 )
+if st == "db":
+    class Place(BaseModel, Base):
+        """ A place to stay """
 
-class Place(BaseModel, Base):
-    """ A place to stay """
-
-    __tablename__ = "places"
+        __tablename__ = "places"
     
-    if st == "db":
         city_id = Column(String(60),
                 ForeignKey("cities.id"),
                 nullable=False)
@@ -71,7 +70,8 @@ class Place(BaseModel, Base):
 
         
 
-    else:
+else:
+    class Place(BaseModel):
         city_id = ""
         user_id = ""
         name = ""
@@ -84,22 +84,31 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
+
         @property
         def reviews(self):
-            """
-            returns list of review instance with place_id
-            equals to the current place.id
-            """
+            """ Returns list of reviews """
             from models import storage
             from models.review import Review
 
-            obj = storage.all()
-            lst = list(obj)
-            new =[]
+            all_reviews = storage.all(Review)
+            reviews = []
 
-            for i in lst:
-                if "Review" in i:
-                    temp = Review(obj[i])
-                    if temp.place_id == self.id:
-                        new.append(temp)
+            for review in all_reviews.values():
+                if review.place_id == self.id:
+                    reviews.append(review)
+            return reviews
+
+        @property
+        def amenities(self):
+            """ Returns list of amenity ids """
+            return self.amenity_ids
+
+        @amenities.setter
+        def amenities(self, obj=None):
+            """ Appends amenity ids to the attribute """
+            from models.amenity import Amenity
+
+            if type(obj) is Amenity and obj.id not in self.amenity_ids:
+                self.amenity_ids.append(obj.id)
 

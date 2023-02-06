@@ -66,4 +66,4 @@ class FileStorage:
 
     def close(self):
         """calls relaod methpod for deserialising the json file to obj"""
-        FileStorage.reload()
+        self.reload()

@@ -18,8 +18,6 @@ def with_cities():
     """displays states with cities"""
     states = storage.all(State).values()
     states = sorted(states, key=lambda d: d.name)
-    #for state in states:
-        #state.cities = sorted(state.cities, key=lambda d: d.name)
     return render_template('8-cities_by_states.html', states=states)
 
 

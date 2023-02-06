@@ -4,7 +4,6 @@ from models.base_model import BaseModel
 from models.base_model import Base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from models.city import City
 from os import getenv
 
 st = getenv("HBNB_TYPE_STORAGE")
@@ -28,8 +27,8 @@ else:
         @property
         def cities(self):
             """getter method for the filestorage"""
-
             from models import storage
+            from models.city import City
             all_cities = storage.all(City)
             cities = []
 

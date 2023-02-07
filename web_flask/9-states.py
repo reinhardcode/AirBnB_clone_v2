@@ -7,10 +7,12 @@ from models.state import State
 
 app = Flask(__name__)
 
+
 @app.teardown_appcontext
 def teardown_db(exception):
     """reload database / teardown"""
     storage.close()
+
 
 @app.route("/states", strict_slashes=False)
 @app.route("/states/<string:id>", strict_slashes=False)
